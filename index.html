@@ -11,10 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- Background Grid -->
     <div class="grid-background"></div>
     
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -24,6 +22,7 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Página inicial</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfólio</a></li>
                 <li><a href="index.html#contact" class="nav-link">Contato</a></li>
                 <li><a href="index.html#about" class="nav-link">Sobre mim</a></li>
             </ul>
@@ -35,7 +34,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -61,31 +59,30 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="portfolio-container">
             <div class="section-header">
                 <h2>Trabalhos Realizados</h2>
                 <div class="header-line"></div>
             </div>
-            <div class="portfolio-grid">
+            <div class="portfolio-grid-home">
                 <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-card">
-                        <div class="card-image">
-                            <!-- Substituído o ícone por uma imagem de placeholder -->
-                            <img src="1.png" alt="Capa do Projeto Branding 01" class="project-cover">
-                            <div class="card-overlay">
-                                <h3>Projeto Branding 01</h3>
-                                <p>Identidade visual completa</p>
+                    <a href="projeto1.html" class="portfolio-link">
+                        <div class="portfolio-card">
+                            <div class="card-image">
+                                <img src="1.png" alt="Capa do Projeto Branding 01" class="project-cover">
+                                <div class="card-overlay">
+                                    <h3>Projeto Branding 01</h3>
+                                    <p>Identidade visual completa</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="portfolio-item" data-category="branding">
                     <div class="portfolio-card">
                         <div class="card-image">
-                            <!-- Substituído o ícone por uma imagem de placeholder -->
-                            <img src="2.jpg"Capa do Projeto Branding 02" class="project-cover">
+                            <img src="2.jpg" alt="Capa do Projeto Branding 02" class="project-cover">
                             <div class="card-overlay">
                                 <h3>Projeto Branding 02</h3>
                                 <p>Redesign de marca</p>
@@ -96,7 +93,6 @@
                 <div class="portfolio-item" data-category="branding">
                     <div class="portfolio-card">
                         <div class="card-image">
-                            <!-- Substituído o ícone por uma imagem de placeholder -->
                             <img src="3.jpg" alt="Capa do Projeto Branding 03" class="project-cover">
                             <div class="card-overlay">
                                 <h3>Projeto Branding 03</h3>
@@ -108,7 +104,6 @@
                 <div class="portfolio-item" data-category="branding">
                     <div class="portfolio-card">
                         <div class="card-image">
-                            <!-- Substituído o ícone por uma imagem de placeholder -->
                             <img src="4.jpg" alt="Capa do Projeto Branding 04" class="project-cover">
                             <div class="card-overlay">
                                 <h3>Projeto Branding 04</h3>
@@ -117,35 +112,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-card">
-                        <div class="card-image">
-                            <!-- Substituído o ícone por uma imagem de placeholder -->
-                            <img src="https://placehold.co/600x400/000000/FFFFFF?text=Projeto+05" alt="Capa do Projeto Branding 05" class="project-cover">
-                            <div class="card-overlay">
-                                <h3>Projeto Branding 05</h3>
-                                <p>Launch de produto</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-card">
-                        <div class="card-image">
-                            <!-- Substituído o ícone por uma imagem de placeholder -->
-                            <img src="https://placehold.co/600x400/000000/FFFFFF?text=Projeto+06" alt="Capa do Projeto Branding 06" class="project-cover">
-                            <div class="card-overlay">
-                                <h3>Projeto Branding 06</h3>
-                                <p>Rebranding premium</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div class="view-all-btn-container">
+                <a href="portfolio.html" class="cta-btn secondary">
+                    <span>Ver todos os projetos</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="contact-container">
             <div class="contact-content">
@@ -174,7 +150,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="social-links">
@@ -202,7 +177,5 @@
     </footer>
 
     <script src="script.js"></script>
-    
-
-</body>
+    <script src="portfolio.js"></script> </body>
 </html>
