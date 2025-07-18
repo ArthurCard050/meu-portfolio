@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Arthur Santana</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Background Grid -->
+    <div class="grid-background"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <span class="logo-text">as.</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Página inicial</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contato</a></li>
+                <li><a href="index.html#about" class="nav-link">Sobre mim</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Hero Section -->
+    <section class="portfolio-hero">
+        <div class="portfolio-hero-content">
+            <div class="breadcrumb">
+                <a href="index.html">Início</a>
+                <span>/</span>
+                <span>Portfólio</span>
+            </div>
+            <h1 class="portfolio-hero-title">Meus Trabalhos</h1>
+            <p class="portfolio-hero-subtitle">Explore uma seleção dos meus projetos mais recentes em branding e design gráfico</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="portfolio-filter">
+        <div class="filter-container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+                <button class="filter-btn" data-filter="logo">Logotipo</button>
+                <button class="filter-btn" data-filter="identity">Identidade Visual</button>
+                <button class="filter-btn" data-filter="packaging">Packaging</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="portfolio-main">
+        <div class="portfolio-main-container">
+            <div class="portfolio-main-grid">
+                <!-- Projeto 1 -->
+                <div class="portfolio-main-item" data-category="branding identity">
+                    <div class="portfolio-main-card">
+                        <div class="card-main-image">
+                            <img src="1.png" alt="Projeto Branding Completo" class="project-main-cover">
+                            <div class="card-main-overlay">
+                                <div class="project-info">
+                                    <h3>Projeto Branding Completo</h3>
+                                    <p>Identidade visual completa para startup de tecnologia</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Branding</span>
+                                        <span class="tag">Identidade Visual</span>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="view-btn" onclick="openModal('project1')">
+                                        <i class="fas fa-eye"></i>
+                                        Visualização Rápida - Projeto
+                                    </button>
+                                    <button class="external-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <div class="portfolio-main-item" data-category="branding logo">
+                    <div class="portfolio-main-card">
+                        <div class="card-main-image">
+                            <img src="2.jpg" alt="Redesign de Marca" class="project-main-cover">
+                            <div class="card-main-overlay">
+                                <div class="project-info">
+                                    <h3>Redesign de Marca</h3>
+                                    <p>Modernização da identidade visual de empresa estabelecida</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Branding</span>
+                                        <span class="tag">Logotipo</span>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="view-btn" onclick="openModal('project2')">
+                                        <i class="fas fa-eye"></i>
+                                        Visualização Rápida - Projeto
+                                    </button>
+                                    <button class="external-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 3 -->
+                <div class="portfolio-main-item" data-category="logo identity">
+                    <div class="portfolio-main-card">
+                        <div class="card-main-image">
+                            <img src="3.jpg" alt="Criação de Logotipo" class="project-main-cover">
+                            <div class="card-main-overlay">
+                                <div class="project-info">
+                                    <h3>Criação de Logotipo</h3>
+                                    <p>Logo minimalista para consultoria empresarial</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Logotipo</span>
+                                        <span class="tag">Identidade Visual</span>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="view-btn" onclick="openModal('project3')">
+                                        <i class="fas fa-eye"></i>
+                                        Visualização Rápida - Projeto
+                                    </button>
+                                    <button class="external-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 4 -->
+                <div class="portfolio-main-item" data-category="branding packaging">
+                    <div class="portfolio-main-card">
+                        <div class="card-main-image">
+                            <img src="4.jpg" alt="Estratégia de Marca" class="project-main-cover">
+                            <div class="card-main-overlay">
+                                <div class="project-info">
+                                    <h3>Estratégia de Marca</h3>
+                                    <p>Desenvolvimento completo de estratégia e aplicações</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Branding</span>
+                                        <span class="tag">Packaging</span>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="view-btn" onclick="openModal('project4')">
+                                        <i class="fas fa-eye"></i>
+                                        Visualização Rápida - Projeto
+                                    </button>
+                                    <button class="external-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 5 -->
+                <div class="portfolio-main-item" data-category="branding identity">
+                    <div class="portfolio-main-card">
+                        <div class="card-main-image">
+                            <img src="https://placehold.co/600x400/000000/FFFFFF?text=Projeto+05" alt="Launch de Produto" class="project-main-cover">
+                            <div class="card-main-overlay">
+                                <div class="project-info">
+                                    <h3>Launch de Produto</h3>
+                                    <p>Identidade visual para lançamento de produto inovador</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Branding</span>
+                                        <span class="tag">Identidade Visual</span>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="view-btn" onclick="openModal('project5')">
+                                        <i class="fas fa-eye"></i>
+                                        Visualização Rápida - Projeto
+                                    </button>
+                                    <button class="external-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 6 -->
+                <div class="portfolio-main-item" data-category="branding packaging">
+                    <div class="portfolio-main-card">
+                        <div class="card-main-image">
+                            <img src="https://placehold.co/600x400/000000/FFFFFF?text=Projeto+06" alt="Rebranding Premium" class="project-main-cover">
+                            <div class="card-main-overlay">
+                                <div class="project-info">
+                                    <h3>Rebranding Premium</h3>
+                                    <p>Transformação completa de marca luxury</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Branding</span>
+                                        <span class="tag">Packaging</span>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="view-btn" onclick="openModal('project6')">
+                                        <i class="fas fa-eye"></i>
+                                        Visualização Rápida - Projeto
+                                    </button>
+                                    <button class="external-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para detalhes do projeto -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="Projeto em destaque">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalTitle">Título do Projeto</h2>
+                    <p id="modalDescription">Descrição detalhada do projeto...</p>
+                    <div class="modal-details">
+                        <div class="detail-item">
+                            <h4>Cliente</h4>
+                            <p id="modalClient">Nome do Cliente</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Categoria</h4>
+                            <p id="modalCategory">Categoria do Projeto</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Ano</h4>
+                            <p id="modalYear">2023</p>
+                        </div>
+                    </div>
+                    <div class="modal-tags" id="modalTags">
+                        <!-- Tags serão inseridas aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i class="fab fa-behance"></i>
+                    <span>Behance</span>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+            <div class="footer-text">
+                <p>&copy; 2023 Arthur Santana</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="portfolio.js"></script>
+</body>
+</html>
