@@ -97,6 +97,52 @@ function smoothPageTransition(projectUrl) {
     
 }
 
+// Cria o overlay de transição utilizado em smoothPageTransition
+function createSmoothTransition() {
+    const overlay = document.createElement('div');
+    overlay.className = 'smooth-transition-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.inset = '0';
+    overlay.style.background = 'rgba(0, 0, 0, 0.8)';
+    overlay.style.opacity = '0';
+    overlay.style.backdropFilter = 'blur(0)';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.transition = 'opacity 0.6s ease, backdrop-filter 0.6s ease';
+    overlay.style.zIndex = '9999';
+    document.body.appendChild(overlay);
+    return overlay;
+}
+
+// Aplica um fade out simples em elementos da página antes de navegar
+function animatePageElements() {
+    document.querySelectorAll('main, header, footer, .portfolio-card').forEach(el => {
+        el.style.transition = 'opacity 0.3s ease';
+        el.style.opacity = '0';
+    });
+}
+
+// Adiciona partículas decorativas ao overlay na transição
+function createFloatingParticles(container) {
+    for (let i = 0; i < 20; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'transition-dot';
+        dot.style.position = 'absolute';
+        dot.style.width = '6px';
+        dot.style.height = '6px';
+        dot.style.background = '#fff';
+        dot.style.borderRadius = '50%';
+        dot.style.top = Math.random() * 100 + '%';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.opacity = '0';
+        dot.style.transition = 'transform 1s ease, opacity 1s ease';
+        container.appendChild(dot);
+        requestAnimationFrame(() => {
+            dot.style.transform = `translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px)`;
+            dot.style.opacity = '1';
+        });
+    }
+}
+
 // Adicionar evento de clique aos cards do portfólio
 document.addEventListener('DOMContentLoaded', function() {
     const portfolioCards = document.querySelectorAll('.portfolio-card');
