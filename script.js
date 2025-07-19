@@ -100,6 +100,8 @@ function smoothPageTransition(projectUrl) {
 // Adicionar evento de clique aos cards do portfólio
 document.addEventListener('DOMContentLoaded', function() {
     const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    const pageLinks = document.querySelectorAll('a[href$=".html"]');
     
     portfolioCards.forEach(card => {
         card.addEventListener('click', function(e) {
@@ -143,6 +145,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+    // Transição suave para links de páginas .html
+    pageLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        // Ignora links externos e âncoras internas
+        if (!href || href.startsWith('#') || href.startsWith('http')) return;
+
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothPageTransition(href);
+        });
+    });
 
 // CSS adicional para loader elegante e animações suaves
 const elegantStyles = document.createElement('style');
