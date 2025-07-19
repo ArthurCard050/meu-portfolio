@@ -1,13 +1,9 @@
-
-
 // Função principal de transição
 function smoothPageTransition(clickedCard, projectUrl) {
     const overlay = createSmoothTransition();
     
     // Bloqueia o scroll da página
     document.body.style.overflow = 'hidden';
-
-  
     
     // Animar elementos da página
     animatePageElements();
@@ -39,8 +35,6 @@ function smoothPageTransition(clickedCard, projectUrl) {
         overlay.style.pointerEvents = 'auto';
     }, 300);
     
-   
-    
     overlay.appendChild(loadingContainer); // Adiciona ao overlay
     
     // Fade in do loading
@@ -62,6 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     portfolioCards.forEach((card, index) => {
         card.addEventListener('click', function(e) {
+            // VERIFICAÇÃO ADICIONADA AQUI:
+            // Se o card clicado estiver dentro de um link (<a>), não faz nada.
+            // Isso permite que o link funcione normalmente.
+            if (e.target.closest('a')) {
+                return;
+            }
+
+            // O código abaixo só será executado se o card NÃO for um link.
             e.preventDefault();
             
             // URLs das páginas dos projetos

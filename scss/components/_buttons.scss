@@ -1,0 +1,131 @@
+// scss/components/_buttons.scss
+
+// Estilo base para todos os botões para reduzir repetição
+%btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    i {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover i {
+        transform: translateX(3px);
+    }
+}
+
+.cta-btn {
+    @extend %btn;
+
+    &.primary {
+        background: linear-gradient(45deg, #fff, #ccc);
+        color: #000;
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    &.secondary {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.3);
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+    }
+}
+
+.submit-btn {
+    @extend %btn;
+    width: 100%;
+    background: linear-gradient(45deg, #fff, #ccc);
+    color: #000;
+    border-radius: 10px;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.view-btn {
+    @extend %btn;
+    flex: 1;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #fff, #ccc);
+    color: #000;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.external-btn {
+    @extend %btn;
+    color: white;
+    width: 45px;
+    height: 45px;
+    padding: 0.8rem;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+}
+
+
+.filter-btn {
+    @extend %btn;
+    color: #ccc;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+        &::before {
+            left: 100%;
+        }
+    }
+
+    &.active {
+        background: linear-gradient(45deg, #fff, #ccc);
+        color: #000;
+        border-color: #fff;
+    }
+}
+
+.view-all-btn-container {
+    text-align: center;
+    margin-top: 4rem;
+}
