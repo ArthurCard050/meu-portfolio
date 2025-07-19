@@ -88,6 +88,14 @@ body {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
+body {
+  transition: opacity 0.5s ease-in-out;
+}
+
+body.page-exit-animation {
+  opacity: 0;
+}
+
 @media (max-width: 480px) {
   .section-header h2 {
     font-size: 2rem;
@@ -399,7 +407,7 @@ body {
   margin-top: 4rem;
 }
 
-.project-navigation .nav-project, .detail-card, .gallery-item, .process-steps .process-step, .portfolio-card, .portfolio-main-card {
+.portfolio-card, .portfolio-main-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -408,7 +416,7 @@ body {
           backdrop-filter: blur(10px);
   overflow: hidden;
 }
-.project-navigation .nav-project:hover, .detail-card:hover, .gallery-item:hover, .process-steps .process-step:hover, .portfolio-card:hover, .portfolio-main-card:hover {
+.portfolio-card:hover, .portfolio-main-card:hover {
   transform: translateY(-10px);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -1030,27 +1038,51 @@ body {
   }
 }
 .service-hero {
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
   padding: 120px 2rem 4rem;
-  text-align: center;
+  background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  position: relative;
 }
 .service-hero .service-hero-content {
   max-width: 1200px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+}
+.service-hero .breadcrumb {
+  margin-bottom: 2rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+.service-hero .breadcrumb a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.service-hero .breadcrumb a:hover {
+  color: #ccc;
+}
+.service-hero .breadcrumb span {
+  margin: 0 0.5rem;
 }
 .service-hero .service-title {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.1;
+  background: linear-gradient(45deg, #fff, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .service-hero .service-subtitle {
   font-size: 1.3rem;
   color: #ccc;
   max-width: 700px;
   margin: 0 auto 3rem;
+  line-height: 1.5;
 }
 .service-hero .service-meta {
   display: flex;
@@ -1069,14 +1101,17 @@ body {
   font-size: 0.9rem;
   color: #666;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .service-hero .meta-value {
   font-size: 1.1rem;
+  color: #fff;
   font-weight: 600;
 }
 
 .service-main-image {
   padding: 4rem 2rem;
+  background: linear-gradient(180deg, #000 0%, #111 50%, #000 100%);
 }
 .service-main-image .main-image-container {
   max-width: 1200px;
@@ -1085,28 +1120,41 @@ body {
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
-.service-main-image .main-project-image {
+.service-main-image .main-image-container img {
   width: 100%;
-  display: block;
   height: auto;
+  max-height: 50vh;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform 0.6s ease;
 }
-.service-main-image .main-project-image:hover {
+.service-main-image .main-image-container:hover img {
   transform: scale(1.05);
 }
 
-.service-content {
-  padding: 6rem 2rem;
-}
 .service-content .service-content-container {
   max-width: 1200px;
   margin: 0 auto;
 }
 .service-content .content-section {
   margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+.service-content .content-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.service-content .content-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.service-content .content-section:nth-child(3) {
+  animation-delay: 0.3s;
 }
 .service-content .content-section h2 {
   font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   position: relative;
@@ -1126,91 +1174,124 @@ body {
   color: #ccc;
   margin-bottom: 1.5rem;
 }
-
-.process-steps {
+.service-content .process-steps {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
-.process-steps .process-step {
+.service-content .process-step {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
   padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
-.process-steps .step-number {
+.service-content .process-step:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.service-content .process-step .step-number {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(45deg, #fff, #666);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
   min-width: 40px;
 }
-.process-steps .step-content h3 {
+.service-content .process-step .step-content h3 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
 }
-.process-steps .step-content p {
+.service-content .process-step .step-content p {
   color: #ccc;
   margin: 0;
 }
+.service-content .details-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.service-content .detail-card {
+  flex: 1 1 280px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.service-content .detail-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.service-content .detail-card i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.service-content .detail-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.service-content .detail-card p {
+  margin: 0;
+}
 
-.details-grid, .gallery-grid {
+.project-gallery {
+  margin-top: 6rem;
+}
+.project-gallery h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+.project-gallery h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #fff, #666);
+}
+
+.gallery-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
-.detail-card, .gallery-item {
-  flex: 1 1 280px;
-  padding: 2rem;
-  text-align: center;
-}
-.detail-card i, .gallery-item i {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.gallery-item {
+  flex: 1 1 300px;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
   display: block;
 }
-.detail-card h3, .gallery-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-}
-.detail-card p, .gallery-item p {
-  color: #ccc;
-  margin: 0;
-}
-
-.gallery-item {
-  padding: 0;
-  position: relative;
-  cursor: pointer;
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 .gallery-item .gallery-image {
   width: 100%;
   height: 250px;
   -o-object-fit: cover;
      object-fit: cover;
-  transition: transform 0.3s ease;
-}
-.gallery-item:hover .gallery-image {
-  transform: scale(1.05);
-}
-.gallery-item .gallery-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-  display: flex;
-  align-items: flex-end;
-  padding: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.gallery-item .gallery-overlay h4 {
-  font-size: 1.1rem;
-}
-.gallery-item:hover .gallery-overlay {
-  opacity: 1;
+  display: block;
 }
 
 .project-navigation {
@@ -1227,14 +1308,25 @@ body {
 }
 .project-navigation .nav-project {
   flex: 1 1 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
 }
-.project-navigation .nav-project a {
+.project-navigation .nav-project:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.project-navigation .nav-project .nav-project-link {
   display: block;
   padding: 2rem;
   text-decoration: none;
   color: #fff;
 }
-.project-navigation .nav-direction {
+.project-navigation .nav-project .nav-direction {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1242,14 +1334,16 @@ body {
   color: #666;
   margin-bottom: 0.5rem;
 }
-.project-navigation .nav-next .nav-direction {
+.project-navigation .nav-project.nav-next .nav-direction {
   justify-content: flex-end;
 }
-.project-navigation h3 {
+.project-navigation .nav-project h3 {
   font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
   transition: color 0.3s ease;
 }
-.project-navigation a:hover h3 {
+.project-navigation .nav-project:hover h3 {
   color: #ccc;
 }
 
@@ -1278,14 +1372,35 @@ body {
 }
 
 @media (max-width: 768px) {
-  .service-hero, .service-main-image, .service-content, .project-navigation, .service-cta {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .service-hero {
+    padding: 100px 1rem 2rem;
+  }
+  .service-title {
+    font-size: 2.5rem;
+  }
+  .service-subtitle {
+    font-size: 1.1rem;
+  }
+  .service-meta {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .service-main-image {
+    padding: 2rem 1rem;
+  }
+  .service-content {
+    padding: 4rem 1rem;
+  }
+  .content-section h2 {
+    font-size: 2rem;
   }
   .process-step {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+  .cta-content h2 {
+    font-size: 2rem;
   }
   .cta-buttons {
     flex-direction: column;
@@ -1294,7 +1409,32 @@ body {
   .cta-buttons .cta-btn {
     width: 100%;
     max-width: 250px;
-    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  .service-hero {
+    padding: 80px 1rem 2rem;
+  }
+  .service-title {
+    font-size: 2rem;
+  }
+  .service-content {
+    padding: 3rem 1rem;
+  }
+  .content-section h2 {
+    font-size: 1.8rem;
+  }
+  .process-step, .detail-card {
+    padding: 1.5rem;
+  }
+  .gallery-image {
+    height: 200px;
+  }
+  .nav-project-link {
+    padding: 1.5rem;
+  }
+  .service-cta {
+    padding: 4rem 1rem;
   }
 }
 .about-hero {

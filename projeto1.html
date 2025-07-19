@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Branding 01 - Arthur Santana</title>
-    <link rel="stylesheet" href="./scss/style.css">
+    <link rel="stylesheet" href="/scss/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -146,38 +146,58 @@
                 </div>
             </div>
 
-            <!-- Project Gallery -->
-            <div class="content-section">
+           <!-- Project Gallery Section -->
+    <section class="project-gallery">
+        <div class="gallery-container">
+            <div class="gallery-header">
                 <h2>Galeria do Projeto</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="2.jpg" alt="Aplicação 1" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Aplicação em Cartão de Visita</h4>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="3.jpg" alt="Aplicação 2" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Mockup de Papelaria</h4>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="4.jpg" alt="Aplicação 3" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Aplicação Digital</h4>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://placehold.co/600x400/000000/FFFFFF?text=Aplicacao+4" alt="Aplicação 4" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Sinalização</h4>
-                        </div>
-                    </div>
+                <p class="gallery-subtitle">Explore todas as aplicações e detalhes do projeto desenvolvido</p>
+            </div>
+
+            <div class="gallery-controls">
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="logo">Logo</button>
+                    <button class="filter-btn" data-filter="papelaria">Papelaria</button>
+                    <button class="filter-btn" data-filter="digital">Digital</button>
+                    <button class="filter-btn" data-filter="mockup">Mockups</button>
                 </div>
+            </div>
+
+            <div class="gallery-grid grid-3" id="galleryGrid">
+                <!-- Gallery items will be dynamically loaded here -->
+            </div>
+
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreBtn">
+                    <span>Carregar Mais</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
             </div>
         </div>
     </section>
+
+    <!-- Modern Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-controls">
+                <button class="lightbox-btn" id="lightboxClose" title="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-info">
+                <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                <p class="lightbox-description" id="lightboxDescription"></p>
+            </div>
+        </div>
+    </div>
 
     <!-- Project Navigation -->
     <section class="project-navigation">

@@ -96,6 +96,17 @@ body {
     }
 }
 
+// Adicionar ao final de scss/layout/_grid.scss
+
+// Animação de Saída de Página
+body {
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.page-exit-animation {
+    opacity: 0;
+}
+
 // Responsividade para elementos base
 @media (max-width: 480px) {
     .section-header h2 {
