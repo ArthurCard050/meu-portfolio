@@ -241,3 +241,31 @@
         }
     }
 }
+
+.project-navigation {
+    .nav-project.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none; // Impede o clique
+
+        &:hover {
+            transform: none;
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+        }
+    }
+}
+
+.project-navigation {
+    .nav-project.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none; // Impede qualquer evento de clique
+
+        &:hover {
+            // Reseta os efeitos de hover para o estado normal
+            transform: none;
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+        }
+    }

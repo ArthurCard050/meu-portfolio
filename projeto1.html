@@ -149,34 +149,32 @@
             <div class="project-gallery">
                 <h2>Galeria do Projeto</h2>
                 <div class="gallery-grid">
-                    <div class="gallery-item">
+                    <a href="2.jpg" class="gallery-item" data-title="Aplicação em Cartão de Visita">
                         <img src="2.jpg" alt="Aplicação 1" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Aplicação em Cartão de Visita</h4>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a href="3.jpg" class="gallery-item" data-title="Mockup de Papelaria">
                         <img src="3.jpg" alt="Aplicação 2" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Mockup de Papelaria</h4>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a href="4.jpg" class="gallery-item" data-title="Aplicação Digital">
                         <img src="4.jpg" alt="Aplicação 3" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Aplicação Digital</h4>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
+                    </a>
+                    <a href="https://placehold.co/1200x800/000000/FFFFFF?text=Aplicacao+4" class="gallery-item" data-title="Sinalização">
                         <img src="https://placehold.co/600x400/000000/FFFFFF?text=Aplicacao+4" alt="Aplicação 4" class="gallery-image">
-                        <div class="gallery-overlay">
-                            <h4>Sinalização</h4>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev">&#10094;</button>
+        <button class="lightbox-next">&#10095;</button>
+        <div class="lightbox-content">
+            <img src="" class="lightbox-image" alt="Imagem do projeto em destaque">
+            <div class="lightbox-title"></div>
+        </div>
+    </div>
 
     <!-- Project Navigation -->
     <section class="project-navigation">
@@ -250,5 +248,7 @@
     </footer>
 
     <script src="service.js"></script>
+
+    <script src="portfolio.js"></script>
 </body>
 </html>

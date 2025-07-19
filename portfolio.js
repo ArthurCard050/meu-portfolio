@@ -204,3 +204,78 @@ document.addEventListener('DOMContentLoaded', () => {
     animateItemsOnScroll();
 
 });
+
+// ===================================
+// LÓGICA DA GALERIA LIGHTBOX
+// ===================================
+document.addEventListener('DOMContentLoaded', () => {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (galleryItems.length === 0) return; // Só continua se houver uma galeria na página
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+
+    let currentIndex = 0;
+    const images = Array.from(galleryItems).map(item => ({
+        src: item.href,
+        title: item.dataset.title
+    }));
+
+    function showLightbox(index) {
+        currentIndex = index;
+        lightboxImage.src = images[currentIndex].src;
+        lightboxTitle.textContent = images[currentIndex].title;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function showNextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showLightbox(currentIndex);
+    }
+
+    function showPrevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showLightbox(currentIndex);
+    }
+
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            showLightbox(index);
+        });
+    });
+
+    lightboxClose.addEventListener('click', hideLightbox);
+    lightboxNext.addEventListener('click', showNextImage);
+    lightboxPrev.addEventListener('click', showPrevImage);
+
+    // Fechar ao clicar fora da imagem
+    lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) {
+            hideLightbox();
+        }
+    });
+
+    // Fechar com a tecla Escape e navegar com as setas
+    document.addEventListener('keydown', e => {
+        if (lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') {
+                hideLightbox();
+            } else if (e.key === 'ArrowRight') {
+                showNextImage();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevImage();
+            }
+        }
+    });
+});
