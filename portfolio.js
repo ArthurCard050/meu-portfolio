@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeout;
         return (...args) => {
             clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
+            timeout = setTimeout(() => func(...args), wait);
         };
     };
     window.addEventListener('scroll', debounce(handleScroll, 10));

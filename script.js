@@ -1,5 +1,52 @@
+// Cria o overlay de transição utilizado em smoothPageTransition
+function createSmoothTransition() {
+    const overlay = document.createElement('div');
+    overlay.className = 'smooth-transition-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.inset = '0';
+    overlay.style.background = 'rgba(0, 0, 0, 0.8)';
+    overlay.style.opacity = '0';
+    overlay.style.backdropFilter = 'blur(0)';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.transition = 'opacity 0.6s ease, backdrop-filter 0.6s ease';
+    overlay.style.zIndex = '9999';
+    document.body.appendChild(overlay);
+    return overlay;
+}
+
+// Aplica um fade out simples em elementos da página antes de navegar
+function animatePageElements() {
+    document.querySelectorAll('main, header, footer, .portfolio-card').forEach(el => {
+        el.style.transition = 'opacity 0.3s ease';
+        el.style.opacity = '0';
+    });
+}
+
+// Adiciona partículas decorativas ao overlay na transição
+function createFloatingParticles(container) {
+    for (let i = 0; i < 20; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'transition-dot';
+        dot.style.position = 'absolute';
+        dot.style.width = '6px';
+        dot.style.height = '6px';
+        dot.style.background = '#fff';
+        dot.style.borderRadius = '50%';
+        dot.style.top = Math.random() * 100 + '%';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.opacity = '0';
+        dot.style.transition = 'transform 1s ease, opacity 1s ease';
+        container.appendChild(dot);
+        requestAnimationFrame(() => {
+            dot.style.transform = `translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px)`;
+            dot.style.opacity = '1';
+        });
+    }
+}
+
+
 // Função principal de transição
-function smoothPageTransition(clickedCard, projectUrl) {
+function smoothPageTransition(projectUrl) {
     const overlay = createSmoothTransition();
     
     // Bloqueia o scroll da página
@@ -54,7 +101,7 @@ function smoothPageTransition(clickedCard, projectUrl) {
 document.addEventListener('DOMContentLoaded', function() {
     const portfolioCards = document.querySelectorAll('.portfolio-card');
     
-    portfolioCards.forEach((card, index) => {
+    portfolioCards.forEach(card => {
         card.addEventListener('click', function(e) {
             // VERIFICAÇÃO ADICIONADA AQUI:
             // Se o card clicado estiver dentro de um link (<a>), não faz nada.
@@ -66,15 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // O código abaixo só será executado se o card NÃO for um link.
             e.preventDefault();
             
-            // URLs das páginas dos projetos
-            const projectUrls = [
-                'projeto1.html', // Projeto Branding 01
-                'projeto2.html', // Projeto Branding 02
-                'projeto3.html', // Projeto Branding 03
-                'projeto4.html', // Projeto Branding 04
-                'projeto5.html', // Projeto Branding 05
-                'projeto6.html'  // Projeto Branding 06
-            ];
+            const projectUrl = this.dataset.url;
+            if (!projectUrl) return;
+
             
             // Efeito suave de clique
             this.style.transition = 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
@@ -82,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.filter = 'brightness(1.1)';
             
             setTimeout(() => {
-                smoothPageTransition(this, projectUrls[index]);
+                smoothPageTransition(projectUrl);
             }, 200);
         });
         
