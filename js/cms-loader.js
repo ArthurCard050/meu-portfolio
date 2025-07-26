@@ -1,3 +1,7 @@
+document.getElementById('seo-title').textContent = data.seo_title || data.title;
+document.getElementById('seo-description').setAttribute('content', data.seo_description || data.description);
+document.getElementById('seo-image').setAttribute('content', data.seo_image || data.image);
+
 async function loadCMSData() {
   const base = "/content";
 

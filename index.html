@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arthur Santana - Designer Gráfico</title>
+    <title id="seo-title">Arthur Santana - Designer Gráfico</title>
     <link rel="stylesheet" href="./scss/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="description" id="seo-description" content="Descrição do projeto">
+  <meta property="og:image" id="seo-image" content="">
 </head>
 
 <body>
@@ -178,6 +180,36 @@
     <script type="module" src="./js/script.js"></script>
     <script src="/js/portfolio.js"></script>
     <script src="js/cms-loader.js"></script>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> 
+      <!-- Botão invisível de edição -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (user) {
+          const btn = document.createElement("a");
+          btn.href = "/admin";
+          btn.textContent = "✏️ Editar esta página";
+          btn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #111;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+          `;
+          document.body.appendChild(btn);
+        }
+      });
+
+      window.netlifyIdentity.init();
+    }
+  </script>
+
 </body>
 </html>

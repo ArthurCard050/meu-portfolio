@@ -8,17 +8,29 @@ public_folder: "/uploads"
 collections:
   - name: "projetos"
     label: "Projetos"
+    label_singular: "Projeto"
     folder: "content/projetos"
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} - {{client}}"
+    sortable_fields: ["title", "year"]
+    preview_path: "portfolio.html"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Descrição", name: "description", widget: "text" }
+      - { label: "Descrição do Projeto", name: "description", widget: "text" }
       - { label: "Cliente", name: "client", widget: "string" }
       - { label: "Ano", name: "year", widget: "string" }
-      - { label: "Categoria", name: "category", widget: "string" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Imagem", name: "image", widget: "image" }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Branding", "Web Design", "Campanha", "Social Media"] }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Imagem de Capa", name: "image", widget: "image" }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Título SEO", name: "seo_title", widget: "string", required: false }
+          - { label: "Descrição SEO", name: "seo_description", widget: "text", required: false }
+          - { label: "Imagem SEO", name: "seo_image", widget: "image", required: false }
 
   - name: "sobre"
     label: "Sobre Mim"
