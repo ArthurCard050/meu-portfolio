@@ -131,26 +131,31 @@
         <p>Vamos criar algo incrível juntos</p>
       </div>
       <div class="contact-form">
-        <form name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contato" />
-          <p style="display:none">
-            <label>Não preencha: <input name="bot-field" /></label>
-          </p>
+        <form id="contato-form" name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="contato" />
+  <p style="display:none">
+    <label>Não preencha: <input name="bot-field" /></label>
+  </p>
 
-          <div class="form-group">
-            <input type="text" name="nome" placeholder="Seu nome" required />
-          </div>
-          <div class="form-group">
-            <input type="email" name="email" placeholder="Seu email" required />
-          </div>
-          <div class="form-group">
-            <textarea name="mensagem" placeholder="Sua mensagem" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">
-            <span>Enviar mensagem</span>
-            <i class="fas fa-arrow-right"></i>
-          </button>
-        </form>
+  <div class="form-group">
+    <input type="text" name="nome" placeholder="Seu nome" required />
+  </div>
+  <div class="form-group">
+    <input type="email" name="email" placeholder="Seu email" required />
+  </div>
+  <div class="form-group">
+    <textarea name="mensagem" placeholder="Sua mensagem" rows="5" required></textarea>
+  </div>
+  <button type="submit" class="submit-btn">
+    <span>Enviar mensagem</span>
+    <i class="fas fa-arrow-right"></i>
+  </button>
+</form>
+
+<!-- Modal de sucesso -->
+<div id="sucesso-modal" style="display:none; position:fixed; top:20px; right:20px; background:#111; color:#fff; padding:1rem 1.5rem; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.4); z-index:9999;">
+  Obrigado! Sua mensagem foi enviada com sucesso 💌
+</div>
       </div>
     </div>
   </div>
@@ -216,6 +221,30 @@
       window.netlifyIdentity.init();
     }
   </script>
+
+<script>
+  const form = document.getElementById("contato-form");
+  const modal = document.getElementById("sucesso-modal");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => {
+        modal.style.display = "block";
+        setTimeout(() => {
+          modal.style.display = "none";
+          form.reset();
+        }, 5000); // oculta após 5s
+      })
+      .catch((error) => alert("Erro ao enviar: " + error));
+  });
+</script>
 
 </body>
 </html>
