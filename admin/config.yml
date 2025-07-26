@@ -1,0 +1,54 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "projetos"
+    label: "Projetos"
+    folder: "content/projetos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descrição", name: "description", widget: "text" }
+      - { label: "Cliente", name: "client", widget: "string" }
+      - { label: "Ano", name: "year", widget: "string" }
+      - { label: "Categoria", name: "category", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Imagem", name: "image", widget: "image" }
+
+  - name: "sobre"
+    label: "Sobre Mim"
+    files:
+      - label: "Conteúdo"
+        name: "sobre"
+        file: "content/sobre.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Subtítulo", name: "subtitle", widget: "string" }
+          - { label: "Texto", name: "body", widget: "markdown" }
+          - { label: "Imagem de Perfil", name: "image", widget: "image" }
+
+  - name: "home"
+    label: "Página Inicial"
+    files:
+      - label: "Hero"
+        name: "hero"
+        file: "content/home/hero.md"
+        fields:
+          - { label: "Nome", name: "nome", widget: "string" }
+          - { label: "Sobrenome", name: "sobrenome", widget: "string" }
+          - { label: "Frase", name: "subtitle", widget: "string" }
+
+  - name: "contato"
+    label: "Seção Contato"
+    files:
+      - label: "Texto de Contato"
+        name: "contact"
+        file: "content/contact.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Descrição", name: "description", widget: "string" }
