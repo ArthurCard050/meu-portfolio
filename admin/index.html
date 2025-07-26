@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Administração</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager</title>
   </head>
   <body>
-    <!-- Container opcional -->
-    <div id="nc-root"></div>
-
-    <!-- Carrega a lib DO CMS -->
-    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
-
-    <!-- Só depois chama init -->
-    <script>
-      if (typeof CMS !== 'undefined') {
-        CMS.init();
-      } else {
-        console.error('Netlify CMS não foi carregado corretamente.');
-      }
-    </script>
+    <!-- Include the script that builds the page and powers Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
-</html>
+</htm
