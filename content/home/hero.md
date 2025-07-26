@@ -1,5 +1,5 @@
 ---
-nome: "Arthur"
-sobrenome: "Santana"
-subtitle: "Construindo Conexões, Inspirando Sucesso."
+nome: Arthur
+sobrenome: Cardoso
+subtitle: Construindo Conexões, Inspirando Sucesso.
 ---
