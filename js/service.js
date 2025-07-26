@@ -1,3 +1,4 @@
+import { debounce } from "./utils.js";
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===== LÓGICA DO MENU MOBILE E NAVBAR =====
@@ -15,13 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (navbar) {
         // Efeito de scroll na Navbar
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', debounce(() => {
             if (window.scrollY > 50) {
                 navbar.classList.add('navbar-scrolled');
             } else {
                 navbar.classList.remove('navbar-scrolled');
             }
-        });
+        }, 50));
     }
 
     // ===== ANIMAÇÃO DE ENTRADA AO ROLAR A PÁGINA =====

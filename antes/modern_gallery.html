@@ -513,7 +513,7 @@
     <!-- Modern Lightbox -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
-            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <img loading="lazy" src="" alt="" class="lightbox-image" id="lightboxImage">
             <div class="lightbox-controls">
                 <button class="lightbox-btn" id="lightboxClose" title="Fechar">
                     <i class="fas fa-times"></i>
@@ -736,7 +736,7 @@
                 div.dataset.index = index;
 
                 div.innerHTML = `
-                    <img src="${item.src}" alt="${item.title}" class="gallery-image" loading="lazy">
+                   <img loading="lazy" src="${item.src}" alt="${item.title}" class="gallery-image">
                     <div class="gallery-overlay">
                         <h4>${item.title}</h4>
                         <p>${item.description}</p>
