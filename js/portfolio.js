@@ -1,25 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Seletores Globais ---
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
     const navbar = document.querySelector('.navbar');
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-main-item');
     const modal = document.getElementById('projectModal');
 
-    // --- Menu Mobile ---
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
 
     // --- Efeito de Scroll na Navbar (Otimizado) ---
     const handleScroll = () => {

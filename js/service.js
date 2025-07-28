@@ -1,19 +1,6 @@
 import { debounce } from "./utils.js";
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ===== LÓGICA DO MENU MOBILE E NAVBAR =====
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navbar = document.querySelector('.navbar');
-
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-    }
-
     if (navbar) {
         // Efeito de scroll na Navbar
         window.addEventListener('scroll', debounce(() => {

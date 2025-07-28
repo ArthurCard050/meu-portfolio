@@ -22,12 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => smoothPageTransition(projectUrls[index]), 200);
     });
 
-card.addEventListener('mouseenter', () => {
+    card.addEventListener('mouseenter', () => {
       card.style.transform = 'translateY(-10px) scale(1.01)';
       card.style.boxShadow = '0 20px 60px rgba(255, 255, 255, 0.12)';
       card.style.filter = 'brightness(1.05)';
       card.classList.add('hover-active');
-
     });
 
     card.addEventListener('mouseleave', () => {
@@ -36,18 +35,20 @@ card.addEventListener('mouseenter', () => {
       card.classList.remove('hover-active');
       card.style.boxShadow = 'none';
     });
+  });
 
-    });
-
+  // Consolidated Hamburger Menu Logic
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
   if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open'); // This helps prevent scrolling when menu is open
     });
   }
 
+  // Close nav menu when a link is clicked
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -58,6 +59,10 @@ card.addEventListener('mouseenter', () => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
+      // Close hamburger menu and nav menu
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
     });
   });
 });
