@@ -29,10 +29,12 @@ export function animatePageElements() {
     const elements = document.querySelectorAll('.portfolio-card, .hero-title, .nav-menu, .contact-form');
     elements.forEach((element, index) => {
         setTimeout(() => {
-            element.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-            element.style.transform = 'translateY(20px) scale(0.95)';
-            element.style.opacity = '0.3';
-            element.style.filter = 'blur(3px)';
+            element.style.cssText += `
+                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+                transform: translateY(20px) scale(0.95);
+                opacity: 0.3;
+                filter: blur(3px);
+            `;
         }, index * 100);
     });
 }
@@ -68,6 +70,7 @@ export function smoothPageTransition(projectUrl) {
     animatePageElements();
     createFloatingParticles(overlay);
 
+    // Criar loader
     const loadingContainer = document.createElement('div');
     loadingContainer.style.cssText = `
         position: fixed;
@@ -79,28 +82,19 @@ export function smoothPageTransition(projectUrl) {
         opacity: 0;
         transition: all 0.6s ease-out;
         z-index: 10001;
-        filter: none;
     `;
-    const loader = document.createElement('div');
-    loader.className = 'elegant-loader';
-    const loadingText = document.createElement('p');
-    loadingText.textContent = 'Carregando projeto...';
-    loadingText.style.cssText = `
-        margin-top: 20px;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        opacity: 0.8;
+    
+    loadingContainer.innerHTML = `
+        <div class="elegant-loader"></div>
+        <p style="margin-top: 20px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; letter-spacing: 1px; opacity: 0.8;">
+            Carregando projeto...
+        </p>
     `;
-    loadingContainer.appendChild(loader);
-    loadingContainer.appendChild(loadingText);
     document.body.appendChild(loadingContainer);
 
+    // Sequência de animações
     setTimeout(() => {
-        overlay.style.opacity = '1';
-        overlay.style.backdropFilter = 'blur(20px)';
-        overlay.style.pointerEvents = 'auto';
+        overlay.style.cssText += 'opacity: 1; backdrop-filter: blur(20px); pointer-events: auto;';
     }, TRANSITION_CONFIG.overlayAppearDelay);
 
     setTimeout(() => {
