@@ -142,3 +142,6 @@ async function loadCMSData() {
 
 // Inicializar carregamento
 loadCMSData();
+
+// Adicione esta linha para que o Rollup inclua este arquivo no bundle
+export {};

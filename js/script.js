@@ -1,13 +1,44 @@
+// js/script.js (SEU NOVO PONTO DE ENTRADA PRINCIPAL PARA O ROLLUP)
 import { smoothPageTransition } from './animations.js';
+import { debounce } from './utils.js'; // Importa debounce de utils.js
+import './portfolio.js'; // Importa a lógica do portfolio (incluindo openModal global)
+import './cms-loader.js'; // Importa e executa a lógica do CMS
+import './service.js'; // Importa a lógica da página de serviço/galeria
+
+// Configurações globais que estavam em service.js e script.js
+document.documentElement.style.scrollBehavior = 'smooth';
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, observerOptions);
+
+function observeGalleryItems() {
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        observer.observe(item);
+    });
+}
+
+// Adicione um pequeno delay para garantir que o DOM esteja pronto antes de observar
+setTimeout(observeGalleryItems, 100);
+
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Lógica dos Cards do Portfólio (Home Page)
     const portfolioCards = document.querySelectorAll('.portfolio-card');
     const projectUrls = [
         'projeto1.html', 'projeto2.html', 'projeto3.html',
         'projeto4.html', 'projeto5.html', 'projeto6.html'
     ];
 
-    // Funcionalidade dos Cards do Portfólio
     portfolioCards.forEach((card, index) => {
         const handleCardClick = (e) => {
             e.preventDefault();
@@ -42,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('mouseleave', () => handleCardHover(false));
     });
 
-    // Menu Mobile
+    // Menu Mobile (Centralizado aqui)
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
@@ -50,10 +81,28 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open'); // Adicionado para controle de overflow
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open'); // Remover classe também
+            });
         });
     }
 
-    // Smooth Scroll para links âncora
+    // Scroll da Navbar (Centralizado aqui)
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        window.addEventListener('scroll', debounce(() => {
+            navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
+        }, 50));
+    }
+
+    // Smooth Scroll para links âncora (Centralizado aqui)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -66,126 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // REMOVA TODO O BLOCO elegantStyles CONSTANTE E SEU APPEND CHILD.
+    // O CSS deve vir do seu `scss/style.min.css`
+    // const elegantStyles = document.createElement('style');
+    // elegantStyles.textContent = `...`;
+    // document.head.appendChild(elegantStyles);
 });
-
-// Estilos CSS consolidados
-const elegantStyles = document.createElement('style');
-elegantStyles.textContent = `
-    .elegant-loader {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: conic-gradient(#00f0ff 0%, #0055ff 25%, rgba(255,255,255,0.1) 25%);
-        animation: rotateProgress 1.5s linear infinite;
-        position: relative;
-        margin: 0 auto;
-    }
-
-    .elegant-loader::before {
-        content: "";
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        width: 50px;
-        height: 50px;
-        background: #111;
-        border-radius: 50%;
-        z-index: 1;
-    }
-
-    @keyframes rotateProgress {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    @keyframes particleFloat {
-        0%, 100% {
-            transform: translateY(0px) translateX(0px);
-            opacity: 0.3;
-        }
-        50% {
-            transform: translateY(-15px) translateX(8px);
-            opacity: 0.8;
-        }
-    }
-
-    .portfolio-card {
-        cursor: pointer;
-        will-change: transform, filter, box-shadow;
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .card-overlay {
-        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .portfolio-card:hover .card-overlay {
-        transform: translateY(0);
-        backdrop-filter: blur(15px);
-    }
-
-    .smooth-transition-overlay {
-        will-change: opacity, backdrop-filter;
-    }
-
-    .hamburger {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        padding: 4px;
-    }
-
-    .hamburger span {
-        width: 25px;
-        height: 3px;
-        background: #fff;
-        margin: 3px 0;
-        transition: 0.3s;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-
-    @media (max-width: 768px) {
-        .hamburger {
-            display: flex;
-        }
-
-        .nav-menu {
-            position: fixed;
-            left: -100%;
-            top: 70px;
-            flex-direction: column;
-            background-color: rgba(17, 17, 17, 0.95);
-            width: 100%;
-            text-align: center;
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-menu.active {
-            left: 0;
-        }
-
-        .nav-menu li {
-            margin: 15px 0;
-        }
-    }
-
-    * {
-        transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-    }
-`;
-
-document.head.appendChild(elegantStyles);

@@ -1,11 +1,14 @@
-// Função utilitária para debounce
-const debounce = (func, wait) => {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-    };
-};
+// js/portfolio.js
+import { debounce } from "./utils.js"; // Importe debounce do utils.js
+
+// REMOVA A SEGUINTE FUNÇÃO DESTE ARQUIVO:
+// const debounce = (func, wait) => {
+//     let timeout;
+//     return (...args) => {
+//         clearTimeout(timeout);
+//         timeout = setTimeout(() => func(...args), wait);
+//     };
+// };
 
 // Dados dos projetos
 const projectsData = {
@@ -15,7 +18,7 @@ const projectsData = {
         client: "TechStart Solutions",
         category: "Branding • Identidade Visual",
         year: "2023",
-        image: "1.png",
+        image: "./media/1.png", // Ajuste o caminho da imagem se necessário
         tags: ["Branding", "Identidade Visual", "Startup", "Tecnologia"]
     },
     project2: {
@@ -24,7 +27,7 @@ const projectsData = {
         client: "Empresa Tradicional Ltda",
         category: "Branding • Redesign",
         year: "2023",
-        image: "2.jpg",
+        image: "./media/2.jpg", // Ajuste o caminho da imagem se necessário
         tags: ["Branding", "Redesign", "Modernização", "Logotipo"]
     },
     project3: {
@@ -33,7 +36,7 @@ const projectsData = {
         client: "Consultoria Pro Business",
         category: "Logotipo • Identidade Visual",
         year: "2023",
-        image: "3.jpg",
+        image: "./media/3.jpg", // Ajuste o caminho da imagem se necessário
         tags: ["Logotipo", "Minimalismo", "Consultoria", "Profissional"]
     },
     project4: {
@@ -42,7 +45,7 @@ const projectsData = {
         client: "Premium Products Co.",
         category: "Branding • Estratégia",
         year: "2023",
-        image: "4.jpg",
+        image: "./media/4.jpg", // Ajuste o caminho da imagem se necessário
         tags: ["Estratégia", "Branding", "Packaging", "Premium"]
     },
     project5: {
@@ -66,34 +69,16 @@ const projectsData = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navbar = document.querySelector('.navbar');
-    const modal = document.getElementById('projectModal');
+    // REMOVA A LÓGICA DO HAMBURGER E NAVMENU DAQUI, SERÁ CENTRALIZADA EM SCRIPT.JS
+    // const hamburger = document.querySelector('.hamburger');
+    // const navMenu = document.querySelector('.nav-menu');
+    // if (hamburger && navMenu) { /* ... */ }
 
-    // Menu Mobile
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+    // REMOVA A LÓGICA DO SCROLL DA NAVBAR DAQUI, SERÁ CENTRALIZADA EM SCRIPT.JS
+    // const navbar = document.querySelector('.navbar');
+    // if (navbar) { /* ... */ }
 
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-    }
-
-    // Scroll da Navbar
-    if (navbar) {
-        window.addEventListener('scroll', debounce(() => {
-            navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
-        }, 10));
-    }
-
-    // Filtro do Portfólio
+    // Filtro do Portfólio (Mantenha esta lógica)
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-main-item');
 
@@ -127,7 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Modal do Projeto
+    // Modal do Projeto (Mantenha esta lógica e a atribuição global)
+    const modal = document.getElementById('projectModal');
     if (modal) {
         const openModal = (projectId) => {
             const project = projectsData[projectId];
@@ -178,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.openModal = openModal;
     }
 
-    // Lightbox da Galeria
+    // Lightbox da Galeria (Mantenha esta lógica)
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.getElementById('lightbox');
 
@@ -193,8 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currentIndex = 0;
         const images = Array.from(galleryItems).map(item => ({
-            src: item.href,
-            title: item.dataset.title
+            src: item.href || item.querySelector('img')?.src, // Use href ou src da imagem interna
+            title: item.dataset.title || item.querySelector('h4')?.textContent // Use dataset.title ou h4
         }));
 
         const showLightbox = (index) => {
@@ -247,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Animação de entrada com Intersection Observer
+    // Animação de entrada com Intersection Observer (Mantenha esta lógica)
     if (portfolioItems.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

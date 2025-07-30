@@ -1,3 +1,4 @@
+// js/service.js
 import { debounce } from "./utils.js";
 
 // Classe principal para gerenciar a galeria moderna
@@ -267,7 +268,7 @@ class ModernGallery {
     }
 }
 
-// Função utilitária para animação de digitação
+// Função utilitária para animação de digitação (Mantenha esta função)
 function typeText(element, text, speed = 80) {
     let i = 0;
     element.textContent = '';
@@ -283,26 +284,14 @@ function typeText(element, text, speed = 80) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navbar = document.querySelector('.navbar');
+    // REMOVA A LÓGICA DO HAMBURGER, NAVMENU E NAVBAR SCROLL DAQUI
+    // const hamburger = document.querySelector('.hamburger');
+    // const navMenu = document.querySelector('.nav-menu');
+    // const navbar = document.querySelector('.navbar');
+    // if (hamburger && navMenu) { /* ... */ }
+    // if (navbar) { /* ... */ }
 
-    // Menu Mobile e Navbar
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-    }
-
-    if (navbar) {
-        window.addEventListener('scroll', debounce(() => {
-            navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
-        }, 50));
-    }
-
-    // Animação de entrada ao rolar
+    // Animação de entrada ao rolar (Mantenha esta lógica)
     const animatedElements = document.querySelectorAll('.content-section, .process-step, .detail-card, .gallery-item, .nav-project');
     if (animatedElements.length > 0) {
         const observer = new IntersectionObserver((entries) => {
@@ -317,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animatedElements.forEach(el => observer.observe(el));
     }
     
-    // Animação de digitação do título
+    // Animação de digitação do título (Mantenha esta lógica)
     const serviceTitle = document.querySelector('.service-title');
     if (serviceTitle) {
         const originalText = serviceTitle.textContent;
@@ -333,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
         titleObserver.observe(serviceTitle);
     }
     
-    // Lightbox básico (para páginas que não usam ModernGallery)
+    // Lightbox básico (para páginas que não usam ModernGallery) (Mantenha esta lógica)
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.getElementById('lightbox');
 
@@ -348,8 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let currentIndex = 0;
         const images = Array.from(galleryItems).map(item => ({
-            src: item.href,
-            title: item.dataset.title
+            src: item.href || item.querySelector('img')?.src, // Use href ou src da imagem interna
+            title: item.dataset.title || item.querySelector('h4')?.textContent // Use dataset.title ou h4
         }));
 
         const updateLightbox = () => {
@@ -370,6 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const hideLightbox = () => {
             lightbox.classList.remove('active');
+            document.body.classList.remove('lightbox-active'); // Adicione para controle de overflow
             document.body.style.overflow = 'auto';
         };
 
@@ -409,32 +399,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Inicializar ModernGallery se necessário
+    // Inicializar ModernGallery se necessário (Mantenha esta lógica)
     if (document.getElementById('galleryGrid')) {
         new ModernGallery();
     }
 });
 
-// Configurações globais
-document.documentElement.style.scrollBehavior = 'smooth';
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-        }
-    });
-}, observerOptions);
-
-function observeGalleryItems() {
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        observer.observe(item);
-    });
-}
-
-setTimeout(observeGalleryItems, 100);
+// REMOVA AS CONFIGURAÇÕES GLOBAIS DAQUI, SERÃO CENTRALIZADAS EM SCRIPT.JS
+// document.documentElement.style.scrollBehavior = 'smooth';
+// const observerOptions = { /* ... */ };
+// const observer = new IntersectionObserver((entries) => { /* ... */ }, observerOptions);
+// function observeGalleryItems() { /* ... */ }
+// setTimeout(observeGalleryItems, 100);
