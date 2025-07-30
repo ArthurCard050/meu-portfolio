@@ -1450,7 +1450,7 @@ body.page-exit-animation {
   }
 }
 .about-hero {
-  min-height: 60vh;
+  margin-top: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
