@@ -1,37 +1,33 @@
 backend:
   name: git-gateway
-  branch: main # Mantenha a branch que você está usando (ex: main, master)
+  branch: main
 
-media_folder: "static/uploads" # Pasta onde as imagens do CMS serão salvas no seu repositório
-public_folder: "/uploads" # Caminho para acessar as imagens no seu site gerado
+media_folder: "static/uploads"
+public_folder: "/uploads"
 
 collections:
-  # Coleção para os itens do Portfólio/Serviços
-  - name: "services" # ID da coleção, deve corresponder a 'collections.services' no Eleventy
-    label: "Serviços/Projetos" # Rótulo no painel do CMS
-    folder: "content/services" # Pasta onde os arquivos Markdown dos projetos serão salvos
-    create: true # Permite criar novos projetos
-    slug: "{{slug}}" # Gera o nome do arquivo a partir do título (ex: meu-primeiro-projeto.md)
+  - name: "services"
+    label: "Serviços/Projetos"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
     fields:
-      - {label: "Título do Serviço/Projeto", name: "title", widget: "string", required: true}
-      - {label: "Data do Projeto", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", picker_format: "YYYY-MM-DD HH:mm", required: true, hint: "Use o formato AAAA-MM-DD HH:MM para exibição e ordenação."}
-      - {label: "URL da Imagem de Capa (Portfólio)", name: "portfolio_image", widget: "image", required: true, hint: "A imagem principal que aparece na listagem do portfólio."}
-      - {label: "Descrição Curta (Capa)", name: "short_description", widget: "string", required: true, hint: "Uma breve descrição para a capa do portfólio."}
-      - {label: "Categorias para Filtro", name: "categories", widget: "list", required: true, hint: "Lista de categorias para o filtro do portfólio (ex: 'Web Design', 'Branding'). Cada categoria deve ser um item separado na lista.", field: {label: "Categoria", name: "category", widget: "string"}}
-      - {label: "Nome do Cliente", name: "client", widget: "string", required: false}
-      - {label: "Serviços Prestados", name: "services_provided", widget: "list", required: false, hint: "Lista de serviços específicos deste projeto.", field: {label: "Serviço", name: "service", widget: "string"}}
-      - {label: "URL do Projeto Online", name: "project_url", widget: "string", required: false, hint: "Link externo para o projeto finalizado."}
-      - {label: "Conteúdo Detalhado da Página", name: "body", widget: "markdown", required: true, hint: "O conteúdo principal da página individual do projeto, usando Markdown."}
-      - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/service.njk"} # Define o layout no Eleventy
-      - {label: "Permalinks", name: "permalink", widget: "hidden", default: "portfolio/{{slug}}/index.html"} # Define a URL gerada pelo Eleventy
-
-      # Campos para o Modal
+      - {label: "Título do Serviço/Projeto", name: "title", widget: "string", required: true, hint: "Título principal do trabalho realizado ou serviço."}
+      - {label: "Data do Projeto", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", picker_format: "YYYY-MM-DD HH:mm", required: true, hint: "Data de conclusão do projeto, para ordenação e exibição."}
+      - {label: "Imagem de Capa do Portfólio", name: "portfolio_image", widget: "image", required: true, hint: "Imagem principal que aparecerá na listagem do portfólio."}
+      - {label: "Descrição Curta (Capa)", name: "short_description", widget: "string", required: true, hint: "Uma breve descrição que aparecerá abaixo da imagem de capa no portfólio."}
+      - {label: "Categorias para Filtro", name: "categories", widget: "list", required: true, hint: "Adicione categorias ou tags para filtrar os projetos na página do portfólio (ex: Design, Desenvolvimento Web, Branding).", field: {label: "Categoria", name: "category", widget: "string"}}
+      - {label: "Cliente", name: "client", widget: "string", required: false, hint: "Nome do cliente para quem o trabalho foi realizado."}
+      - {label: "Serviços Prestados", name: "services_provided", widget: "list", required: false, hint: "Liste os serviços específicos que foram realizados neste projeto (ex: UI/UX Design, Desenvolvimento Front-end).", field: {label: "Serviço", name: "service", widget: "string"}}
+      - {label: "URL do Projeto (se houver)", name: "project_url", widget: "string", required: false, hint: "Link para o projeto online, se aplicável."}
+      - {label: "Conteúdo Detalhado da Página de Serviço", name: "body", widget: "markdown", required: true, hint: "Conteúdo completo da página dedicada a este serviço/projeto. Use Markdown para formatar texto, adicionar títulos, listas, etc."}
+      
       - label: "Informações do Modal (Opcional)"
         name: "modal_info"
         widget: "object"
-        required: false # Todo o objeto modal_info é opcional
+        required: false
         fields:
-          - {label: "Título do Modal", name: "modal_title", widget: "string", required: false, hint: "Um título específico para o modal, se diferente do título do projeto."}
+          - {label: "Título do Modal", name: "modal_title", widget: "string", required: false, hint: "Um título específico para o modal, se diferente do título principal do serviço."}
           - label: "Galeria de Imagens do Modal"
             name: "modal_gallery"
             widget: "list"
@@ -39,34 +35,9 @@ collections:
             fields:
               - {label: "Imagem do Modal", name: "image", widget: "image", required: true}
               - {label: "Legenda da Imagem", name: "caption", widget: "string", required: false}
-          - {label: "Descrição Detalhada no Modal", name: "modal_description_detail", widget: "markdown", required: false, hint: "Texto adicional para o corpo do modal."}
+          - {label: "Descrição Detalhada no Modal", name: "modal_description_detail", widget: "markdown", required: false, hint: "Mais detalhes ou contexto específico para o conteúdo do modal."}
           - {label: "Link do Projeto no Modal", name: "modal_project_link", widget: "string", required: false, hint: "Um link adicional para o projeto, se precisar de um botão dentro do modal."}
 
-  # Exemplo de coleção para páginas fixas (Home, Sobre, Contato)
-  - name: "pages"
-    label: "Páginas do Site"
-    files:
-      - file: "content/home/hero.md" # Seu arquivo hero.md existente
-        label: "Seção Hero (Home)"
-        name: "home_hero"
-        fields:
-          - {label: "Título Principal", name: "title", widget: "string"}
-          - {label: "Subtítulo", name: "subtitle", widget: "string"}
-          - {label: "Texto do Botão", name: "button_text", widget: "string"}
-          - {label: "Link do Botão", name: "button_link", widget: "string"}
-          # Adicione mais campos conforme o conteúdo do seu hero.md
-
-      - file: "content/sobre.md"
-        label: "Página Sobre"
-        name: "about_page"
-        fields:
-          - {label: "Título da Página", name: "title", widget: "string"}
-          - {label: "Conteúdo", name: "body", widget: "markdown"}
-
-      - file: "content/contact.md"
-        label: "Página Contato"
-        name: "contact_page"
-        fields:
-          - {label: "Título da Página", name: "title", widget: "string"}
-          - {label: "Conteúdo (Formulário, Endereço)", name: "body", widget: "markdown"}
-          # Adicione campos específicos de contato como email, telefone, etc.
+      # Campos de layout hidden para o Eleventy
+      - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/service.njk"}
+      - {label: "Permalink", name: "permalink", widget: "hidden", default: "portfolio/{{slug}}/index.html"}
