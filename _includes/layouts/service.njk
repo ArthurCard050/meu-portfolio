@@ -1,0 +1,60 @@
+---
+layout: "base.njk" # Este layout estende o layout base
+---
+<section class="project-detail">
+    <h1>{{ title }}</h1>
+    <p class="project-date">Data: {{ date | date('dd/MM/yyyy') }}</p>
+
+    {% if client %}
+    <p>Cliente: {{ client }}</p>
+    {% endif %}
+
+    {% if services_provided.length %}
+    <p>Serviços:
+        {% for service in services_provided %}
+        <span>{{ service }}</span>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {% endif %}
+
+    {% if project_url %}
+    <p><a href="{{ project_url }}" target="_blank">Ver Projeto Online</a></p>
+    {% endif %}
+
+    <img src="{{ portfolio_image }}" alt="{{ title }}" class="project-main-image">
+
+    <div class="project-content">
+        {{ content | safe }} {# O corpo do Markdown do projeto é injetado aqui #}
+    </div>
+
+    {# Início da estrutura para o Modal (Pode ser um componente JS que se baseia nesses dados) #}
+    {% if modal_info %}
+    <button class="open-modal-button" data-modal-target="#projectModal-{{ slug }}">Ver Detalhes do Projeto</button>
+
+    <div id="projectModal-{{ slug }}" class="modal" style="display:none;"> {# Esconda por padrão e mostre com JS #}
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>{{ modal_info.modal_title or title }}</h2>
+
+            {% if modal_info.modal_description_detail %}
+            <p>{{ modal_info.modal_description_detail | safe }}</p>
+            {% endif %}
+
+            {% if modal_info.modal_gallery.length %}
+            <div class="modal-gallery">
+                {% for item in modal_info.modal_gallery %}
+                <figure>
+                    <img src="{{ item.image }}" alt="{{ item.caption }}">
+                    {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
+                </figure>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if modal_info.modal_project_link %}
+            <p><a href="{{ modal_info.modal_project_link }}" target="_blank">Visitar Projeto Completo</a></p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</section>

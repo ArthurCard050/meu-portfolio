@@ -1,66 +1,72 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Mantenha a branch que você está usando (ex: main, master)
 
-media_folder: "static/uploads"
-public_folder: "/uploads"
+media_folder: "static/uploads" # Pasta onde as imagens do CMS serão salvas no seu repositório
+public_folder: "/uploads" # Caminho para acessar as imagens no seu site gerado
 
 collections:
-  - name: "projetos"
-    label: "Projetos"
-    label_singular: "Projeto"
-    folder: "content/projetos"
-    create: true
-    slug: "{{slug}}"
-    summary: "{{title}} - {{client}}"
-    sortable_fields: ["title", "year"]
-    preview_path: "portfolio.html"
+  # Coleção para os itens do Portfólio/Serviços
+  - name: "services" # ID da coleção, deve corresponder a 'collections.services' no Eleventy
+    label: "Serviços/Projetos" # Rótulo no painel do CMS
+    folder: "content/services" # Pasta onde os arquivos Markdown dos projetos serão salvos
+    create: true # Permite criar novos projetos
+    slug: "{{slug}}" # Gera o nome do arquivo a partir do título (ex: meu-primeiro-projeto.md)
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Descrição do Projeto", name: "description", widget: "text" }
-      - { label: "Cliente", name: "client", widget: "string" }
-      - { label: "Ano", name: "year", widget: "string" }
-      - { label: "Categoria", name: "category", widget: "select", options: ["Branding", "Web Design", "Campanha", "Social Media"] }
-      - { label: "Tags", name: "tags", widget: "list", default: [] }
-      - { label: "Imagem de Capa", name: "image", widget: "image" }
-      - label: "SEO"
-        name: "seo"
+      - {label: "Título do Serviço/Projeto", name: "title", widget: "string", required: true}
+      - {label: "Data do Projeto", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", picker_format: "YYYY-MM-DD HH:mm", required: true, hint: "Use o formato AAAA-MM-DD HH:MM para exibição e ordenação."}
+      - {label: "URL da Imagem de Capa (Portfólio)", name: "portfolio_image", widget: "image", required: true, hint: "A imagem principal que aparece na listagem do portfólio."}
+      - {label: "Descrição Curta (Capa)", name: "short_description", widget: "string", required: true, hint: "Uma breve descrição para a capa do portfólio."}
+      - {label: "Categorias para Filtro", name: "categories", widget: "list", required: true, hint: "Lista de categorias para o filtro do portfólio (ex: 'Web Design', 'Branding'). Cada categoria deve ser um item separado na lista.", field: {label: "Categoria", name: "category", widget: "string"}}
+      - {label: "Nome do Cliente", name: "client", widget: "string", required: false}
+      - {label: "Serviços Prestados", name: "services_provided", widget: "list", required: false, hint: "Lista de serviços específicos deste projeto.", field: {label: "Serviço", name: "service", widget: "string"}}
+      - {label: "URL do Projeto Online", name: "project_url", widget: "string", required: false, hint: "Link externo para o projeto finalizado."}
+      - {label: "Conteúdo Detalhado da Página", name: "body", widget: "markdown", required: true, hint: "O conteúdo principal da página individual do projeto, usando Markdown."}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/service.njk"} # Define o layout no Eleventy
+      - {label: "Permalinks", name: "permalink", widget: "hidden", default: "portfolio/{{slug}}/index.html"} # Define a URL gerada pelo Eleventy
+
+      # Campos para o Modal
+      - label: "Informações do Modal (Opcional)"
+        name: "modal_info"
         widget: "object"
-        collapsed: true
+        required: false # Todo o objeto modal_info é opcional
         fields:
-          - { label: "Título SEO", name: "seo_title", widget: "string", required: false }
-          - { label: "Descrição SEO", name: "seo_description", widget: "text", required: false }
-          - { label: "Imagem SEO", name: "seo_image", widget: "image", required: false }
+          - {label: "Título do Modal", name: "modal_title", widget: "string", required: false, hint: "Um título específico para o modal, se diferente do título do projeto."}
+          - label: "Galeria de Imagens do Modal"
+            name: "modal_gallery"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Imagem do Modal", name: "image", widget: "image", required: true}
+              - {label: "Legenda da Imagem", name: "caption", widget: "string", required: false}
+          - {label: "Descrição Detalhada no Modal", name: "modal_description_detail", widget: "markdown", required: false, hint: "Texto adicional para o corpo do modal."}
+          - {label: "Link do Projeto no Modal", name: "modal_project_link", widget: "string", required: false, hint: "Um link adicional para o projeto, se precisar de um botão dentro do modal."}
 
-  - name: "sobre"
-    label: "Sobre Mim"
+  # Exemplo de coleção para páginas fixas (Home, Sobre, Contato)
+  - name: "pages"
+    label: "Páginas do Site"
     files:
-      - label: "Conteúdo"
-        name: "sobre"
-        file: "content/sobre.md"
+      - file: "content/home/hero.md" # Seu arquivo hero.md existente
+        label: "Seção Hero (Home)"
+        name: "home_hero"
         fields:
-          - { label: "Título", name: "title", widget: "string" }
-          - { label: "Subtítulo", name: "subtitle", widget: "string" }
-          - { label: "Texto", name: "body", widget: "markdown" }
-          - { label: "Imagem de Perfil", name: "image", widget: "image" }
+          - {label: "Título Principal", name: "title", widget: "string"}
+          - {label: "Subtítulo", name: "subtitle", widget: "string"}
+          - {label: "Texto do Botão", name: "button_text", widget: "string"}
+          - {label: "Link do Botão", name: "button_link", widget: "string"}
+          # Adicione mais campos conforme o conteúdo do seu hero.md
 
-  - name: "home"
-    label: "Página Inicial"
-    files:
-      - label: "Hero"
-        name: "hero"
-        file: "content/home/hero.md"
+      - file: "content/sobre.md"
+        label: "Página Sobre"
+        name: "about_page"
         fields:
-          - { label: "Nome", name: "nome", widget: "string" }
-          - { label: "Sobrenome", name: "sobrenome", widget: "string" }
-          - { label: "Frase", name: "subtitle", widget: "string" }
+          - {label: "Título da Página", name: "title", widget: "string"}
+          - {label: "Conteúdo", name: "body", widget: "markdown"}
 
-  - name: "contato"
-    label: "Seção Contato"
-    files:
-      - label: "Texto de Contato"
-        name: "contact"
-        file: "content/contact.md"
+      - file: "content/contact.md"
+        label: "Página Contato"
+        name: "contact_page"
         fields:
-          - { label: "Título", name: "title", widget: "string" }
-          - { label: "Descrição", name: "description", widget: "string" }
+          - {label: "Título da Página", name: "title", widget: "string"}
+          - {label: "Conteúdo (Formulário, Endereço)", name: "body", widget: "markdown"}
+          # Adicione campos específicos de contato como email, telefone, etc.
