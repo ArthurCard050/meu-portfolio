@@ -1,5 +1,5 @@
 ---
-layout: "_includes/base.njk"
+layout: "base.njk" {# Corrigido aqui #}
 title: "Portfólio - Projetos"
 permalink: "portfolio/index.html"
 ---
@@ -8,6 +8,7 @@ permalink: "portfolio/index.html"
     
     <div class="filter-buttons">
         <button data-filter="all" class="active">Todos</button>
+        {# Adicione um filtro getAllCategories no .eleventy.js para isso funcionar #}
         {% for category in collections.services | getAllCategories %}
             <button data-filter="{{ category | slug }}">{{ category }}</button>
         {% endfor %}

@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "services"
+    label: "Serviços/Projetos"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título do Serviço/Projeto", name: "title", widget: "string", required: true, hint: "Título principal do trabalho realizado ou serviço."}
+      - {label: "Data do Projeto", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", picker_format: "YYYY-MM-DD HH:mm", required: true, hint: "Data de conclusão do projeto, para ordenação e exibição."}
+      - {label: "Imagem de Capa do Portfólio", name: "portfolio_image", widget: "image", required: true, hint: "Imagem principal que aparecerá na listagem do portfólio."}
+      - {label: "Descrição Curta (Capa)", name: "short_description", widget: "string", required: true, hint: "Uma breve descrição que aparecerá abaixo da imagem de capa no portfólio."}
+      - {label: "Categorias para Filtro", name: "categories", widget: "list", required: true, hint: "Adicione categorias ou tags para filtrar os projetos na página do portfólio (ex: Design, Desenvolvimento Web, Branding).", field: {label: "Categoria", name: "category", widget: "string"}}
+      - {label: "Cliente", name: "client", widget: "string", required: false, hint: "Nome do cliente para quem o trabalho foi realizado."}
+      - {label: "Serviços Prestados", name: "services_provided", widget: "list", required: false, hint: "Liste os serviços específicos que foram realizados neste projeto (ex: UI/UX Design, Desenvolvimento Front-end).", field: {label: "Serviço", name: "service", widget: "string"}}
+      - {label: "URL do Projeto (se houver)", name: "project_url", widget: "string", required: false, hint: "Link para o projeto online, se aplicável."}
+      - {label: "Conteúdo Detalhado da Página de Serviço", name: "body", widget: "markdown", required: true, hint: "Conteúdo completo da página dedicada a este serviço/projeto. Use Markdown para formatar texto, adicionar títulos, listas, etc."}
+      
+      - label: "Informações do Modal (Opcional)"
+        name: "modal_info"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Título do Modal", name: "modal_title", widget: "string", required: false, hint: "Um título específico para o modal, se diferente do título principal do serviço."}
+          - label: "Galeria de Imagens do Modal"
+            name: "modal_gallery"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Imagem do Modal", name: "image", widget: "image", required: true}
+              - {label: "Legenda da Imagem", name: "caption", widget: "string", required: false}
+          - {label: "Descrição Detalhada no Modal", name: "modal_description_detail", widget: "markdown", required: false, hint: "Mais detalhes ou contexto específico para o conteúdo do modal."}
+          - {label: "Link do Projeto no Modal", name: "modal_project_link", widget: "string", required: false, hint: "Um link adicional para o projeto, se precisar de um botão dentro do modal."}
+
+      # Campos de layout hidden para o Eleventy
+      - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/service.njk"}
+      - {label: "Permalink", name: "permalink", widget: "hidden", default: "portfolio/{{slug}}/index.html"}
