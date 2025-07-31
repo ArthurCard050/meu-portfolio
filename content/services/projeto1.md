@@ -26,7 +26,7 @@ modal_info:
   modal_description_detail: "Este projeto foi um desafio em otimização de fluxo de usuário para garantir a melhor experiência possível em dispositivos móveis, com foco em acessibilidade e performance."
   modal_project_link: "https://www.behance.net/meu-projeto-mobile" # Opcional
 layout: "layouts/service.njk" # Este é o layout que o Eleventy usará para esta página
-permalink: "portfolio/{{ slug }}/index.html" # Define a URL da página (ex: /portfolio/meu-primeiro-projeto/)
+permalink: "portfolio/{{ page.fileSlug }}/index.html" # Define a URL da página (ex: /portfolio/meu-primeiro-projeto/)
 ---
 
 ## Introdução

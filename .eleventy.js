@@ -10,10 +10,18 @@ module.exports = function(eleventyConfig) {
 
     // Adiciona um filtro de data para formatar datas com o Luxon
     eleventyConfig.addFilter("postDate", (value) => {
-  const dateObj = typeof value === 'string' ? new Date(value) : value;
-  return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
-});
+  const dateObj = typeof value === "string" ? new Date(value) : value;
+        return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+    });
 
+    eleventyConfig.addFilter("date", (value, format = "yyyy") => {
+        const dateObj = value === "now" ? new Date() : (typeof value === "string" ? new Date(value) : value);
+        return DateTime.fromJSDate(dateObj).toFormat(format);
+    });
+
+    eleventyConfig.addCollection("services", (collectionApi) => {
+        return collectionApi.getFilteredByGlob("./content/services/*.md");
+    });
 
 
     // Adicionar um filtro personalizado para obter todas as categorias únicas

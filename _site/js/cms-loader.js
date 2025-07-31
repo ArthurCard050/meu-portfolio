@@ -79,10 +79,10 @@ async function loadProjectsData(base) {
     if (!projectContainer) return;
 
     try {
-        const files = ['projeto-branding-01.md']; // Pode ser dinâmico
+        const files = ['projeto1.md']; // Pode ser dinâmico
         
         for (let file of files) {
-            const res = await fetch(`${base}/projetos/${file}`);
+            const res = await fetch(`${base}/services/${file}`);
             const text = await res.text();
             const data = parseFrontMatter(text);
 
