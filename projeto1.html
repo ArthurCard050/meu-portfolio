@@ -274,35 +274,7 @@
     </footer>
 
    <script src="js/bundle.min.js"></script>
-  <!-- Botão invisível de edição -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (user) {
-          const btn = document.createElement("a");
-          btn.href = "/admin";
-          btn.textContent = "✏️ Editar esta página";
-          btn.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #111;
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 5px;
-            font-size: 14px;
-            text-decoration: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px rgba(0,0,0,0.4);
-          `;
-          document.body.appendChild(btn);
-        }
-      });
-
-      window.netlifyIdentity.init();
-    }
-  </script>
+   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> 
 </body>
 
 </html>
