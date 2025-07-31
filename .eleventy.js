@@ -1,10 +1,20 @@
+const { DateTime } = require("luxon");
+
 module.exports = function(eleventyConfig) {
     // Copiar pastas de assets para a pasta de saída
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("js");
     eleventyConfig.addPassthroughCopy("media");
-    eleventyConfig.addPassthroughCopy("static"); // Mantenha esta para as imagens de upload
-    eleventyConfig.addPassthroughCopy("admin");  // Pasta do Decap CMS
+    eleventyConfig.addPassthroughCopy("static");
+    eleventyConfig.addPassthroughCopy("admin");
+
+    // Adiciona um filtro de data para formatar datas com o Luxon
+    eleventyConfig.addFilter("postDate", (value) => {
+  const dateObj = typeof value === 'string' ? new Date(value) : value;
+  return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+});
+
+
 
     // Adicionar um filtro personalizado para obter todas as categorias únicas
     eleventyConfig.addFilter("getAllCategories", collection => {
@@ -22,13 +32,12 @@ module.exports = function(eleventyConfig) {
     // Adicionar um filtro para slugificar strings (se você não tiver um)
     eleventyConfig.addFilter("slug", text => {
         return text.toString().toLowerCase()
-            .replace(/\s+/g, '-')           // Substitui espaços por hífens
-            .replace(/[^\w-]+/g, '')       // Remove caracteres não alfanuméricos
-            .replace(/--+/g, '-')          // Substitui múltiplos hífens por um único
-            .replace(/^-+/, '')            // Remove hífens do início
-            .replace(/-+$/, '');           // Remove hífens do final
+            .replace(/\s+/g, '-')
+            .replace(/[^\w-]+/g, '')
+            .replace(/--+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '');
     });
-
 
     // Configurar o diretório de entrada para ser a raiz do projeto
     return {
