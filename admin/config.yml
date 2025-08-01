@@ -41,3 +41,26 @@ collections:
       # Campos de layout hidden para o Eleventy
       - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/service.njk"}
       - {label: "Permalink", name: "permalink", widget: "hidden", default: "portfolio/{{slug}}/index.html"}
+
+      - name: "pages"
+    label: "Páginas"
+    files:
+      - file: "content/sobre.md"
+        label: "Página Sobre Mim"
+        name: "sobre"
+        fields:
+          - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/about.njk"}
+          - {label: "Título", name: "title", widget: "string"}
+          - {label: "Subtítulo", name: "subtitle", widget: "string"}
+          - {label: "Imagem de Perfil", name: "image", widget: "image"}
+          - {label: "Corpo do Texto", name: "body", widget: "markdown"}
+      - file: "content/home/hero.md"
+        label: "Seção Hero da Página Inicial"
+        name: "hero-section"
+        fields:
+          - {label: "Título (Nome)", name: "nome", widget: "string"}
+          - {label: "Subtítulo (Sobrenome)", name: "sobrenome", widget: "string"}
+          - {label: "Descrição", name: "subtitle", widget: "string"}
+
+   
+
